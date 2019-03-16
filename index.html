@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Tier Healthcare</title>
+    <script src="lib/three.min.js"></script>
+    <script src="lib/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+    <script src="lib/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+    <script src="lib/threex-artoolkitsource.js"></script>
+    <script src="lib/threex-artoolkitcontext.js"></script>
+    <script src="lib/threex-armarkercontrols.js"></script>
+    <!--Modulated JS-->
+    <script src="js/Template.js"></script>
+    <script src="js/AR.js"></script>
+</head>
+
+<body>
+    <div id="button">
+        <button id="leftbutton" onclick="Grow()">GROW</button>
+        <button id="middlebutton" onclick="playVideo()">PLAY</button>
+        <button id="rightbutton" onclick="Shrink()">SHRINK</button>
+    </div>
+    <script>
+        ///// Init variables:
+        var renderer, scene, camera;
+        var onRenderFcts, lastTimeMsec;
+        var sprite;
+        var params = {opacity: 1};
+        var btext = document.getElementsByTagName("BUTTON")[1].textContent;
+        ///// Video variables:
+        var video, videoImage, videoImageContext, videoTexture;
+        var pc = 0;
+        var ar = new AR();
+        var template = new Template();
+        
+        init();
+
+        function init() {
+            template.init();
+            ar.init(template.renderer, template.scene, template.camera);
+            ar.attachSprite(sprite);
+            lastTimeMsec = null;
+            animate();
+        }
+
+        ///// Animation function:
+        function animate(nowMsec) {
+            ar.update();
+            requestAnimationFrame(animate);
+            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+            lastTimeMsec = nowMsec;
+            pulse = Date.now() * 0.0009;
+            onRenderFcts.forEach(function(onRenderFct) {
+                onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+            });
+
+            ///// Audio player logic, for mobile you require an interaction (button click) in order for sound to initialize.
+            if (markerRoot.visible === true) {
+                audio1.play();
+            }
+            if (markerRoot.visible === false) {
+                audio1.pause();
+            }
+
+            if (markerRoot2.visible === false) {
+                video.pause();
+                pc = 0;
+            }
+            if (markerRoot3.visible === true) {
+                audio3.play();
+            }
+            if (markerRoot3.visible === false) {
+                audio3.pause();
+            }
+
+            ///// Sprite3 "animation" (as an example).
+            spriteMaterial3.rotation += 0.005;
+            spriteMaterial3.opacity -= 0.002;
+
+            if (spriteMaterial3.opacity <= 0) {
+                spriteMaterial3.opacity = 1;
+            }
+            ///// Play the video texture if it's loaded.
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                videoImageContext.drawImage(video, 0, 0);
+                if (videoTexture)
+                    videoTexture.needsUpdate = true;
+            }
+
+            ///// Check if 'PLAY' is clicked, play the video, change 'PLAY' button text depending on video state.
+            if (pc >= 2) {
+                video.pause();
+                pc = 0;
+            }
+
+            if (pc == 1) {
+                btext = "PAUSE";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PAUSE');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PAUSE';
+
+            }
+            if (pc != 1) {
+                btext = "PLAY";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PLAY');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PLAY';
+
+            }
+        }
+
+    </script>
+</body>
+</html>
