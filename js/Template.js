@@ -1,4 +1,4 @@
-class Sketch {
+class Template {
     constructor() {
         this.camera = new THREE.Camera();
         this.renderer = new THREE.WebGLRenderer({alpha: true});
@@ -12,14 +12,14 @@ class Sketch {
     initRenderer() {
         this.renderer.setClearColor(new THREE.Color('lightgrey'), 0);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.body.appendChild(this.renderer.domElement);
     }
     initScene() {
         this.ambient = new THREE.AmbientLight(0x666666);
-        this.scene.add(ambient);
+        this.scene.add(this.ambient);
     }
     initCamera () {
-        this.scene.add(camera);
+        this.scene.add(this.camera);
     }
     update() {
         

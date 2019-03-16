@@ -1,28 +1,25 @@
-THREEx.ArToolkitContext.baseURL = '/'
+THREEx.ArToolkitContext.baseURL = '/';
 class AR {
     constructor() {
         this.context;
-        this.source;
+        this.source = new THREEx.ArToolkitSource({sourceType: 'webcam'});
         this.marker;
         this.customMarker;
         this.onRender = [];
     }
     init(renderer, scene, camera) {
-        this.setSource();
+        this.setSource(renderer);
         this.setContext(camera);
-        this.onRender.push(function() {
-            if (arToolkitSource.ready === false) return
-            arToolkitContext.update(arToolkitSource.domElement)
+        this.onRender.push(() => {
+            if (this.source.ready === false) return
+            this.context.update(this.source.domElement)
         });
-        this.setMarker();
-        this.onRender.push(function() {});
-        this.onRender.push(function() {
-            renderer.render(scene, camera)
-        });
+        this.setMarker(scene);
+        this.onRender.push(function () {});
+        this.onRender.push(function () { renderer.render(scene, camera) });
     }
-    setSource() {
-        this.source = new THREEx.ArToolkitSource({sourceType: 'webcam'});
-        this.source.init(() =>arToolkitSource.onResize(renderer.domElement));
+    setSource(renderer) {
+        this.source.init(() => this.source.onResize(renderer.domElement));
         window.addEventListener('resize', () => this.source.onResize(renderer.domElement));
     }
     setContext(camera) {
@@ -35,19 +32,18 @@ class AR {
         });
         this.context.init(() => camera.projectionMatrix.copy(this.context.getProjectionMatrix()));
     }
-    setMarker() {
-        this.customMarker = new THREE.Group
-        scene.add(this.customMarker)
-        this.marker = new THREEx.ArMarkerControls(this.contet, this.customMarker, {
+    setMarker(scene) {
+        this.customMarker = new THREE.Group;
+        scene.add(this.customMarker);
+        this.marker = new THREEx.ArMarkerControls(this.context, this.customMarker, {
             type: 'pattern',
-            patternUrl: 'data/mac.patt'
+            patternUrl: 'data/patt.hiro'
         });
-        this.customMarker.add(sprite);
     }
     attachSprite(sprite) {
         this.customMarker.add(sprite);
     }
-    update() {
-    
+    update(deltaMsec, nowMsec) {
+        this.onRender.forEach(el => el(deltaMsec/1000, nowMsec/1000));
     }
 }
