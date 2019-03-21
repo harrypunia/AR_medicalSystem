@@ -48,15 +48,16 @@ class AR {
             {type: 'pattern', patternUrl: 'data/patt.hiro'}
         );
     }
+    add(obj) {this.customMarker.add(obj)}
     attachSprite(sprite) {
         this.customMarker = new THREE.Group;
         this.customMarker.add(sprite);
     }
-    update() {
+    update(nowMsec, lastTimeMsec) {
         lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
         const deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
         lastTimeMsec = nowMsec;
-        pulse = Date.now() * 0.0009;
+        const pulse = Date.now() * 0.0009;
         this.onRender.forEach(el => el(deltaMsec/1000, nowMsec/1000));
     }
 }

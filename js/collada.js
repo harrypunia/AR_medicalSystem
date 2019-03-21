@@ -4,7 +4,8 @@ class Collada {
     }
     load(name) {
         this.loader.load('../assets/' + name + '.dae', collada => {
-            //functions
+            ar.add(collada.scene);
+            const details = model.getObjectByName("details", true);
         })
     }
 }

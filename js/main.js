@@ -13,7 +13,7 @@ const init = () => {
 
 const animate = nowMsec => {
     requestAnimationFrame(animate);
-    ar.update();
+    ar.update(nowMsec, lastTimeMsec);
     ar.customMarker.visible ? audio1.play() : audio1.pause();
 }
 
