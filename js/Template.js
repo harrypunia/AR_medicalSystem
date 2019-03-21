@@ -10,7 +10,7 @@ class Template {
         this.initCamera();
     }
     initRenderer() {
-        this.renderer.setClearColor(new THREE.Color('lightgrey'), 0);
+        this.renderer.setClearColor(new THREE.Color('lightgrey'), 0.5);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
     }
@@ -18,10 +18,5 @@ class Template {
         this.ambient = new THREE.AmbientLight(0x666666);
         this.scene.add(this.ambient);
     }
-    initCamera () {
-        this.scene.add(this.camera);
-    }
-    update() {
-        
-    }
+    initCamera () {this.scene.add(this.camera)}
 }

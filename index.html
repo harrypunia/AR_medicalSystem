@@ -4,40 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2 Tier Healthcare</title>
+    <link rel="stylesheet" href="css/global.css">
     <script src="lib/three.min.js"></script>
+    <script src="lib/colladaLoader.js"></script>
     <script src="lib/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
     <script src="lib/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
     <script src="lib/threex-artoolkitsource.js"></script>
     <script src="lib/threex-artoolkitcontext.js"></script>
     <script src="lib/threex-armarkercontrols.js"></script>
-    <!--Modulated JS-->
-    <script src="js/Template.js"></script>
-    <script src="js/AR.js"></script>
 </head>
 
 <body>
-    <script>
-        var lastTimeMsec, sprite, pc = 0;
-        var template = new Template();
-        var ar = new AR();
-        var audio1 = new Audio("assets/audio1.mp3");
-        const init = () => {
-            audio1.play();
-            template.init();
-            ar.init(template.renderer, template.scene, template.camera);
-            lastTimeMsec = null;
-            animate();
-        }
-        const animate = nowMsec => {
-            requestAnimationFrame(animate);
-            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
-            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
-            lastTimeMsec = nowMsec;
-            pulse = Date.now() * 0.0009;
-            ar.update(deltaMsec, nowMsec);
-            ar.customMarker.visible ? audio1.play() : audio1.pause();
-        }
-        init();
-    </script>
+    <script src="js/Template.js"></script>
+    <script src="js/AR.js"></script>
+    <script src='js/collada.js'></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

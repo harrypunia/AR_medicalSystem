@@ -4,7 +4,7 @@ class AR {
         this.context;
         this.source = new THREEx.ArToolkitSource({sourceType: 'webcam'});
         this.marker;
-        this.customMarker;
+        this.customMarker = new THREE.Group;
         this.onRender = [];
     }
     init(renderer, scene, camera) {
@@ -18,11 +18,8 @@ class AR {
         this.onRender.push(function () {});
         this.onRender.push(function () { renderer.render(scene, camera) });
     }
-    setSource(renderer) {
-        this.source.init(() => this.source.onResize(renderer.domElement));
-        window.addEventListener('resize', () => this.source.onResize(renderer.domElement));
-    }
     setContext(camera) {
+        const scope = this;
         this.context = new THREEx.ArToolkitContext({
             cameraParametersUrl: 'data/camera_para.dat',
             detectionMode: 'mono',
@@ -30,20 +27,36 @@ class AR {
             canvasWidth: 80 * 3,
             canvasHeight: 60 * 3,
         });
-        this.context.init(() => camera.projectionMatrix.copy(this.context.getProjectionMatrix()));
-    }
-    setMarker(scene) {
-        this.customMarker = new THREE.Group;
-        scene.add(this.customMarker);
-        this.marker = new THREEx.ArMarkerControls(this.context, this.customMarker, {
-            type: 'pattern',
-            patternUrl: 'data/patt.hiro'
+        this.context.init(function onCompleted () {
+            camera.projectionMatrix.copy(scope.context.getProjectionMatrix())
         });
     }
+    setSource(renderer) {
+        const scope = this
+        this.source.init(function onReady () {
+            scope.source.onResize(renderer.domElement) 
+        });
+        window.addEventListener('resize', function () { 
+            scope.source.onResize(renderer.domElement) 
+        });
+    }
+    setMarker(scene) {
+        scene.add(this.customMarker);
+        this.marker = new THREEx.ArMarkerControls(
+            this.context,
+            this.customMarker,
+            {type: 'pattern', patternUrl: 'data/patt.hiro'}
+        );
+    }
     attachSprite(sprite) {
+        this.customMarker = new THREE.Group;
         this.customMarker.add(sprite);
     }
-    update(deltaMsec, nowMsec) {
+    update() {
+        lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+        const deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+        lastTimeMsec = nowMsec;
+        pulse = Date.now() * 0.0009;
         this.onRender.forEach(el => el(deltaMsec/1000, nowMsec/1000));
     }
 }
