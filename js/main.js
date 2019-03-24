@@ -1,8 +1,7 @@
 let lastTimeMsec = null;
 let template = new Template();
-let collada = new Collada();
 let ar = new AR();
-let audio1 = new Audio("assets/audio1.mp3");
+let interface = document.getElementById('interface');
 
 const init = () => {
     template.init();
@@ -13,7 +12,7 @@ const init = () => {
 const animate = nowMsec => {
     requestAnimationFrame(animate);
     ar.update(nowMsec, lastTimeMsec);
-    ar.customMarker.visible ? audio1.play() : audio1.pause();
+    ar.customMarker.visible ? interface.style.display = 'block': interface.style.display = 'none';
 }
 
 init();
