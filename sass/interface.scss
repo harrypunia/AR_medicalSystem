@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'mixins';
+@import 'animate';
+
+.feed {
+    @include absPos(50vw, 60vh);
+    @include size(200px, auto);
+    padding: 20px;
+    opacity: 0;
+    color: $mainWhite;
+    font-family: $mainFamily;
+    background: $mainColor;
+}
+
+.waitTime {
+    height: auto;
+    width: 400px;
+    @include absPos(50vw, 90vh);
+    text-align: center;
+    background: $mainColor;
+    font-family: $mainFamily;
+    color: $mainWhite;
+
+    &__bar {
+        @include size(100%, 30px);
+        background: $fadedSecondColor;
+
+        &__progress {
+            @include size(20px, 100%);
+            background: $secondColor;
+        }
+    }
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2 Tier Healthcare</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/interface.css">
     <script src="lib/three.min.js"></script>
     <script src="lib/colladaLoader.js"></script>
     <script src="lib/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
@@ -15,7 +16,17 @@
 </head>
 
 <body>
-    <div id="interface">HEYYY</div>
+    <div id="interface">
+        <div class="feed"></div>
+        <div class="waitTime">
+            <h1 class="waitTime__heading">Waiting time</h1>
+            <div class="waitTime__bar">
+                <div class="waitTime__bar__progress"/>
+            </div>
+        </div>
+    </div>
+    <script src="js/Interface.js"></script>
+    <script src="js/Feed.js"></script>
     <script src="js/Template.js"></script>
     <script src="js/AR.js"></script>
     <script src="js/main.js"></script>

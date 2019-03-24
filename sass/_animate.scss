@@ -1,0 +1,18 @@
+@keyframes feed-in {
+    0% {
+        top: 80vh;
+        opacity: 0;
+    }
+    20% {
+        top: 60vh;
+        opacity: 1;
+    }
+    80% {
+        top: 60vh;
+        opacity: 1;
+    }
+    100% {
+        top: 80vh;
+        opacity: 0;
+    }
+}
