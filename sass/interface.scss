@@ -3,31 +3,45 @@
 @import 'animate';
 
 .feed {
-    @include absPos(50vw, 60vh);
-    @include size(200px, auto);
+    @include absPos(50vw, 100px);
+    @include size(300px, auto);
+    @include flex(center, center);
     padding: 20px;
     opacity: 0;
     color: $mainWhite;
     font-family: $mainFamily;
     background: $mainColor;
+//    &__icon {
+//        margin: auto;
+//        @include size(40px, auto);
+//    }
+    &__content {
+        margin: auto;
+        @include size(300px, auto);
+    }
 }
 
 .waitTime {
-    height: auto;
-    width: 400px;
-    @include absPos(50vw, 90vh);
+    @include absPos(50vw, 0px);
+    height: 100px;
+    width: 280px;
     text-align: center;
-    background: $mainColor;
+    padding: 10px 40px;
     font-family: $mainFamily;
     color: $mainWhite;
+    @include loadPattern("../assets/waitTime_background.svg", cover);
 
     &__bar {
-        @include size(100%, 30px);
+        @include size(100%, 20px);
         background: $fadedSecondColor;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        @include loadPattern('../assets/diagonal_pattern.svg', cover);
 
         &__progress {
             @include size(20px, 100%);
             background: $secondColor;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
     }
 }

@@ -1,18 +1,18 @@
 @keyframes feed-in {
     0% {
-        top: 80vh;
+        bottom: 100px;
         opacity: 0;
     }
     20% {
-        top: 60vh;
+        bottom: 200px;
         opacity: 1;
     }
     80% {
-        top: 60vh;
+        bottom: 200px;
         opacity: 1;
     }
     100% {
-        top: 80vh;
+        bottom: 100px;
         opacity: 0;
     }
 }

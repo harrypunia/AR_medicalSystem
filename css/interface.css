@@ -1,52 +1,71 @@
 @keyframes feed-in {
   0% {
-    top: 80vh;
+    bottom: 100px;
     opacity: 0; }
   20% {
-    top: 60vh;
+    bottom: 200px;
     opacity: 1; }
   80% {
-    top: 60vh;
+    bottom: 200px;
     opacity: 1; }
   100% {
-    top: 80vh;
+    bottom: 100px;
     opacity: 0; } }
 
 /* line 5, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
 .feed {
   position: absolute;
   left: 50vw;
-  top: 60vh;
+  bottom: 100px;
   transform: translate(-50%, -50%);
-  width: 200px;
+  width: 300px;
   height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   opacity: 0;
   color: #efefef;
   font-family: sans-serif;
-  background: #333; }
+  background: #231f20; }
+  /* line 18, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
+  .feed__content {
+    margin: auto;
+    width: 300px;
+    height: auto; }
 
-/* line 15, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
+/* line 24, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
 .waitTime {
-  height: auto;
-  width: 400px;
   position: absolute;
   left: 50vw;
-  top: 90vh;
+  bottom: 0px;
   transform: translate(-50%, -50%);
+  height: 100px;
+  width: 280px;
   text-align: center;
-  background: #333;
+  padding: 10px 40px;
   font-family: sans-serif;
-  color: #efefef; }
-  /* line 24, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
+  color: #efefef;
+  background-image: url("../assets/waitTime_background.svg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat; }
+  /* line 34, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
   .waitTime__bar {
     width: 100%;
-    height: 30px;
-    background: #666666; }
-    /* line 28, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
+    height: 20px;
+    background: #f6bd8c;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background-image: url("../assets/diagonal_pattern.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat; }
+    /* line 41, /Users/harsimranpunia/Documents/GitHub/AR_medicalSystem/sass/interface.scss */
     .waitTime__bar__progress {
       width: 20px;
       height: 100%;
-      background: #efefef; }
+      background: #c1282d;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=interface.css.map */

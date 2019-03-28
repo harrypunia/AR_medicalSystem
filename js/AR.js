@@ -45,7 +45,7 @@ class AR {
         this.marker = new THREEx.ArMarkerControls(
             this.context,
             this.customMarker,
-            {type: 'pattern', patternUrl: 'data/patt.hiro'}
+            {type: 'pattern', patternUrl: 'data/cross.patt'}
         );
     }
     add(obj) {this.customMarker.add(obj)}

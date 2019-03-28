@@ -1,11 +1,24 @@
 @mixin absPos($x, $y) {
     position: absolute;
     left: $x;
-    top: $y;
+    bottom: $y;
     transform: translate(-50%, -50%);
+}
+
+@mixin flex($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
 }
 
 @mixin size($w, $h) {
     width: $w;
     height: $h;
+}
+
+@mixin loadPattern($path, $size) {
+    background-image: url($path);
+    background-size: $size;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
