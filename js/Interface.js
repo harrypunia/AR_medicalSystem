@@ -2,8 +2,11 @@ class Interface {
     init() {
         this.container = document.getElementById('interface');
         this.progress = document.getElementsByClassName("waitTime__bar__progress")[0];
-        this.progressStatus = 0;
         this.resetPoint = (Math.random() * 50) + 40;
+        this.progressStatus = 0;
+        this.feedContentIndex = 0;
+        feed.display(reason[this.feedContentIndex]);
+        this.feedContentIndex++;
     }
     update() {
         this.animateProgress();
@@ -13,16 +16,21 @@ class Interface {
         this.progressStatus < this.resetPoint ? this.progressStatus+= 0.1 : this.reset(); 
     }
     reset() {
-        const randomReason = reason[Math.floor(Math.random() * reason.length)]
-        const randomPerson = people[Math.floor(Math.random() * people.length)]
-        feed.display(defaultText + " " + randomPerson + " for " + randomReason);
+        feed.display(reason[this.feedContentIndex]);
+        this.feedContentIndex++;
         this.resetProgress();
-        this.updateResetPoint();
+        this.resetStartPoint();
+        setTimeout(() => {
+            audio.play();
+            feed.display(reason[this.feedContentIndex]);
+            this.feedContentIndex++;
+        }, 3200);
+        this.feedContentIndex == reason.length ? this.feedContentIndex = 0 : 0;
     }
     resetProgress() {
-        this.progressStatus = Math.random() * 50;
+        this.progressStatus = Math.random() * 20;
     }
-    updateResetPoint() {
-        this.resetPoint = (Math.random() * 50) + 40;
+    resetStartPoint() {
+        this.resetPoint = (Math.random() * 20) + 60;
     }
 }

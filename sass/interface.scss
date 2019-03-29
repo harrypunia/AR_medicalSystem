@@ -11,10 +11,6 @@
     color: $mainWhite;
     font-family: $mainFamily;
     background: $mainColor;
-//    &__icon {
-//        margin: auto;
-//        @include size(40px, auto);
-//    }
     &__content {
         margin: auto;
         @include size(300px, auto);

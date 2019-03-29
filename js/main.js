@@ -3,9 +3,15 @@ let template = new Template();
 let ar = new AR();
 let interface = new Interface();
 let feed = new Feed();
-let defaultText = "An adjustment was made for"
-let reason = ["Knee Injury",  "Dick Injury",  "Neck Injury",  "Ankle Injury",  "Face Injury"];
-let people = ["Donald Hump",  "Donald Hump",  "Donald Hump",  "Donald Hump",  "Donald Hump"];
+let audio = new Audio("../assets/cough.mp3");
+let reason = [
+    "A general patient has paid to upgrade to priority status",
+    "Your wait time has been adjusted",
+    "A priority patient has paid to have their cough looked at immediately",
+    "Your wait time has been adjusted",
+    "A priority patient has purchased a larger private room",
+    "Your wait time has been adjusted",
+];
 
 const init = () => {
     feed.init();
@@ -18,7 +24,7 @@ const init = () => {
 const animate = nowMsec => {
     requestAnimationFrame(animate);
     ar.update(nowMsec, lastTimeMsec);
-    //ar.customMarker.visible ? interface.container.style.display = 'block': interface.container.style.display = 'none';
+    ar.customMarker.visible ? interface.container.style.display = 'block': interface.container.style.display = 'none';
     interface.update();
 }
 
