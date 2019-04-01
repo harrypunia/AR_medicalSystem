@@ -24,8 +24,12 @@ const init = () => {
 const animate = nowMsec => {
     requestAnimationFrame(animate);
     ar.update(nowMsec, lastTimeMsec);
-    ar.customMarker.visible ? interface.container.style.display = 'block': interface.container.style.display = 'none';
-    interface.update();
+    if (ar.customMarker.visible) {
+        interface.container.style.display = 'block';
+        interface.update();
+    } else {
+        interface.container.style.display = 'none';
+    }
 }
 
 init();
